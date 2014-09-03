@@ -1,0 +1,3 @@
+[submodule "assignments/gt-cs6250"]
+	path = assignments/gt-cs6250
+	url = git@github.com:OMS6250/gt-cs6250.git
