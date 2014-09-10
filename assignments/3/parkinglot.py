@@ -23,20 +23,15 @@ import os
 from util.monitor import monitor_devs_ng
 
 import mininet
-from mininet.node import CPULimitedHost
-import pygraphviz as pgv
-import tempfile
-import os
+import pygraphviz
 
 def graph_network(topo):
-    # naiive implementation -- don't care
-    host = custom(CPULimitedHost, cpu=.15)
-    link = custom(TCLink, max_queue_size=200)
-    net = Mininet(topo=topo, host=host, link=link)
+    link = custom(TCLink)
+    net = Mininet(topo=topo, link=link)
     mininet.util.dumpNetConnections(net)
     nodes = net.controllers + net.switches + net.hosts
 
-    dot = pgv.AGraph()
+    dot = pygraphviz.AGraph()
 
     edges = []
 
@@ -109,6 +104,9 @@ if not os.path.exists(args.dir):
 
 lg.setLogLevel('info')
 
+def host_name(n): return 'h%d'%(n+1)
+def switch_name(n): return 's%d'%(n+1)
+
 # Topology to be instantiated in Mininet
 class ParkingLotTopo(Topo):
     "Parking Lot Topology"
@@ -141,12 +139,10 @@ class ParkingLotTopo(Topo):
         switches = []
         for i in range(n):
 
-            switch_name = 's%d'%(i+1)
-            s = self.addSwitch(switch_name)
+            s = self.addSwitch(switch_name(i))
             switches.append(s)
 
-            host_name = 'h%d'%(i+1)
-            h = self.addHost(host_name, **hconfig)
+            h = self.addHost(host_name(i), **hconfig)
             hosts.append(h)
 
             # Wire the backbone
@@ -197,14 +193,19 @@ def run_parkinglot_expt(net, n):
 
     # Get receiver and clients
     recvr = net.getNodeByName('receiver')
-    sender1 = net.getNodeByName('h1')
 
     # Start the receiver
     port = 5001
     recvr.cmd('iperf -s -p', port,
               '> %s/iperf_server.txt' % args.dir, '&')
 
-    waitListening(sender1, recvr, port)
+    hosts = [ net.getNodeByName(host_name(i)) for i in range(n) ]
+    for h in hosts: waitListening(h, recvr, port)
+    for h in hosts:
+        a = (recvr.IP(), 5001, seconds, args.dir, h.name)
+        h.sendCmd('iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt'%a)
+    for h in hosts: h.waitOutput()
+
 
     # TODO: start the sender iperf processes and wait for the flows to finish
     # Hint: Use getNodeByName() to get a handle on each sender.
