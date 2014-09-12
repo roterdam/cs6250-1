@@ -19,6 +19,38 @@ def first(lst):
 def second(lst):
     return map(lambda e: e[1], lst)
 
+def label_for_port(port):
+    # Find the IP Address
+    d = os.path.dirname(args.files[0])
+    f = 'iperf_server.txt'
+    p = os.path.join(d, f)
+    fd = open(p, 'r')
+    raw = fd.read()
+    fd.close()
+    ip = None
+    for line in raw.split('\n'):
+        if not len(line): continue
+        if not line.endswith('%d'%port): continue
+        ip = line.split()[-3]
+        break
+
+    # find the host name
+    rxp = '^iperf_.*.txt$'
+    rcm = re.compile(rxp)
+    host = None
+    for f in os.listdir(d):
+        if not rcm.match(f): continue
+        if 'iperf_server.txt' == f: continue
+        # XXX: redo using regex matching
+        fd = open(os.path.join(d, f), 'r')
+        raw = fd.read()
+        fd.close()
+        if '%s,%d'%(ip, port) in raw:
+            host = f[6:-4]
+            break
+
+    return host
+
 """
 Sample line:
 2.221032535 10.0.0.2:39815 10.0.0.1:5001 32 0x1a2a710c 0x1a2a387c 11 2147483647 14592 85
@@ -53,7 +85,7 @@ def plot_cwnds(ax):
             cwnd = cwnds[port]
 
             events += zip(t, [port]*len(t), cwnd)
-            ax.plot(t, cwnd)
+            ax.plot(t, cwnd, label=label_for_port(port))
 
     events.sort()
 total_cwnd = 0
