@@ -203,9 +203,19 @@ def run_parkinglot_expt(net, n):
     for h in hosts: waitListening(h, recvr, port)
     for h in hosts:
         a = (recvr.IP(), 5001, seconds, args.dir, h.name)
-        h.sendCmd('iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt'%a)
-    for h in hosts: h.waitOutput()
 
+        use_alternative = ('h3' == h.name)
+        use_alternative = False
+        #a_cmd = 'iperf -c %s -P 4 -p %s -t %d -i 1 -yc > %s/iperf_%s.txt'%a
+        #a_cmd = 'iperf -c %s -u -p %s -t %d -i 1 -yc > %s/iperf_%s.txt'%a
+
+        # Multiple TCP streams
+        if use_alternative
+            h.sendCmd(a_cmd)
+        else:
+            h.sendCmd('iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt'%a)
+
+    for h in hosts: h.waitOutput()
 
     # TODO: start the sender iperf processes and wait for the flows to finish
     # Hint: Use getNodeByName() to get a handle on each sender.
