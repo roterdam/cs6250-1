@@ -1,0 +1,22 @@
+1. C ("As a result of the preponderance of small objects in large
+       pages, web transfer latency has come to be dominated by both
+       the round-trip time (RTT) between the client and server and the
+       number of round trips required to transfer application data.")
+2. C ("network bandwdith has grown substantially over the past two
+       decades thereby significantly reduc- ing transmission delays")
+3. D (B is accomplished by A, and probably the actual "goal")
+
+4. A ("demonstrate that TCP's handshake is a key performance
+       bot-tleneck for modern web transfers.")
+5. D (cadb)
+      c. Client sends a SYN packet to request both TCP connection and
+         TFO cookie.
+      a. Server encrypts the client IP to generate cookie.
+      d. Client caches the TFO cookie for this particular server’s IP.
+      b. Client sends a SYN packet to request a TCP connection under
+         TFO along with data.
+6. B (amazon.com improv: (4, 10, 11); nytimes.com improv: (4, 6, 18)
+7. A ("At the core of TFO is a security cookie that is used by the
+       server to authenticate a client that is initiating a TFO
+       connection.")
+
