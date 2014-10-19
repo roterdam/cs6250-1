@@ -1,0 +1,98 @@
+1. E
+2. A
+3. A
+4. A
+5. D
+6. B
+
+
+=== 1 ===
+See the cwnd plot for N = 1. Why is the "additive increase" part of
+the sawtooth line curved and not straight?
+
+A. Data variance from time to time, should be straight.
+
+B. It is called “slow-start”, and it is also known as the exponential
+growth phase, TCP congestion window is increased by the number of ACK
+received. C. For that part, TCP congestion window is increased by one
+every round. -- IT IS THE CONGESTION AVOIDANCE PHASE, NOT SLOW START
+(WHICH IS ACTUALLY EXPONENTIAL)
+
+D. It is known as the linear growth phase
+
+E. None of above -- LEAST INCORRECT
+
+=== 2 ===
+Now, see the cwnd plots for other values of N. As N increases, should
+the cumulative cwnd sawtooth show higher or lower variance? Why?
+
+A. Lower variance, it is easier to assign bandwidth equally to more
+TCP flows. -- KINDA-FALSE
+
+B. Higher variance, it is more difficult to assign bandwidth equally
+to more TCP flows. -- FALSE
+
+C. Higher variance, for about tens of TCP flows, usually they are
+synchronized, therefore high variance would be observed. -- FALSE
+
+D. Lower variance, for about thousands of TCP flows, usually they are
+synchronized, therefore lower variance would be observed. -- FALSE
+
+E. None of above -- KINDA-FALSE
+
+=== 3 ===
+What should each host’s bandwidth share be for TCP flows?
+
+A. Hosts should share bandwidth equally.
+
+B. Host which starts TCP flow earlier would get more bandwidth.
+
+C. Host which is near to the receiver would get more bandwidth.
+
+D. Hosts would share bandwidth randomly.
+
+E. None of above
+
+=== 4 ===
+If all hosts used UDP instead, what share would each host get?
+
+A. They also should share bandwidth equally.
+
+B. Half of them will share bandwidth equally, the other half will get
+0 bandwidth.
+
+C. They would share bandwidth randomly.
+
+D. The first host starting UDP flow would get the total bandwidth.
+
+E. None of above
+
+=== 5 ===
+If one of the hosts started more than 1 TCP flow to the receiver, how
+would it affect other flows?
+
+A. Nothing new would happen
+
+B. Other flows would get 0 bandwidth, because one host tries to send
+more than one TCP flow.
+
+C. Other flows would get more bandwidth.
+
+D. Bandwidth will be shared in this way, each flow would get its
+bandwidth in this way: (total_bandwidth) / (total_number_of_tcp_flows)
+
+E. None of above
+
+=== 6 ===
+What if that host used UDP instead of multiple TCP flows?
+
+A. All hosts would get its share of total bandwidth equally.
+
+B. TCP flows would have 0 bandwidth, UDP flow would get the total
+bandwidth eventually.
+
+C. UDP flows would get half of total bandwidth.
+
+D. All hosts would get its share randomly.
+
+E. None of above
