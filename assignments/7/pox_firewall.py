@@ -40,11 +40,28 @@ class Firewall (EventMixin):
     def _handle_ConnectionUp (self, event):
         policies = self.read_policies(policyFile)
         for policy in policies.itervalues():
+
             msg = of.ofp_flow_mod()
             msg.match.dl_src = policy.dl_src
             msg.match.dl_dst = policy.dl_dst
             msg.priority = 20
             event.connection.send(msg)
+
+            # Hey Prof: there still seems to be a bit of confusion on
+            # the forums regarding the bidirectional issue.  AFAICT,
+            # the decision to implement bidirectional blockages is
+            # defensible given the wording of the HW.  Just in case,
+            # though, you can make it directionally sensitive by
+            # swapping the boolean below.  I've tested it by manually
+            # updating the ARP tables and sending UDP packets.
+            do_block_both_directions = True
+
+            if do_block_both_directions:
+                msg = of.ofp_flow_mod()
+                msg.match.dl_dst = policy.dl_src
+                msg.match.dl_src = policy.dl_dst
+                msg.priority = 20
+                event.connection.send(msg)
 
         log.debug("Firewall rules installed on %s", dpidToStr(event.dpid))
 

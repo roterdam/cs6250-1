@@ -63,8 +63,23 @@ def main():
     # Note: this uses the same policy named tuple from the POX
     # firewall code. Please refer there for further info.
     for policy in policies.itervalues():
+
         cur = match(srcmac=EthAddr(policy.mac_0), dstmac=EthAddr(policy.mac_1))
         not_allowed = not_allowed | cur
+
+        # Hey Prof: there still seems to be a bit of confusion on the
+        # forums regarding the bidirectional issue.  AFAICT, the
+        # decision to implement bidirectional blockages is defensible
+        # given the wording of the HW.  Just in case, though, you can
+        # make it directionally sensitive by swapping the boolean
+        # below.  I've tested it by manually updating the ARP tables
+        # and sending UDP packets.
+        do_block_both_directions = True
+
+        if do_block_both_directions:
+            cur = match(srcmac=EthAddr(policy.mac_1),
+                        dstmac=EthAddr(policy.mac_0))
+            not_allowed = not_allowed | cur
 
     # TODO express allowed traffic in terms of not_allowed - hint use '~'
     allowed = ~not_allowed
