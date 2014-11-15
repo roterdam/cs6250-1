@@ -1,0 +1,101 @@
+1. C
+2. A
+3. D
+4. A
+5. A
+6. B
+
+1. Which of the following best describes DoS attack?
+A - DoS attacks are an attempt to make a machine or network resource
+    unavailable to its intended users.
+B - DoS attacks can max out the processor's usage, preventing any work
+    from occurring.
+C - Both A and B
+
+A is true AND a description of a DoS attack.  B is true, but a
+description of a specific type of DoS attack (it is denial of service
+to a resource, CPU is one example of a resource).  C is a better
+description as a whole in that it includes a description AND an
+example.
+Final Answer: C
+
+
+
+2. sFlow-RT is a real-time sFlow analytics engine for use in Software
+   Defined Networking (SDN) stacks.  The sFlow engine works in the
+   asynchronous way.
+A - True
+B - False
+
+inmon.com
+
+Final Answer: A
+
+
+
+3. Which of the following best describes sFlow?
+A - sFlow can be used for monitoring high-speed switched and routed
+    networks.
+B - sFlow is widely available in all classes of network equipment;
+    from small department switches through to large 10G data center
+    switches and routers.
+C - sFlow offers greater scalability and reporting detail; providing
+    detailed, real-time, L2-7 information on traffic throughout the
+    network.
+D - All of the above
+
+A is a description of a capability of sflow, not sflow itself.  B is a
+statement about sflow pulled from their marketing collateral.  C is
+the same as B.  None of the options describe sflow.  A, B, and C are
+either statements about it, or descriptions of some specific
+capabilities.  D is probably the best answer.
+
+Final Answer: D
+
+
+
+4. Which of the following best describes PyResonance?
+A - PyResonance is a Resonance platform implemented in Pyretic.
+B - With PyResonance, multiple network policies can be built and
+    composed together (sequentially or parallelly) as an overall
+    network policy.
+C - With PyResonance, multiple states can be built into each network
+    policy.
+D - All of the above
+
+From the Resonance-SDN github wiki:
+"PyResonance is a Resonance platform implemented in Pyretic."
+A it is.
+
+Final Answer: A
+
+
+
+5. The Finite State Machine in this experiment has two states, “allow”
+   and “block”.
+A - True
+B - False
+
+Starting with the definition for "this experiment" as being step 5,
+and the definition for "The Finite State Machine" being the FSM of the
+system as a whole (as opposed to the DDoSFSM class/object/FSM), then
+yes.  We either block the IP, or we don't.  We don't degrade service,
+we don't throttle, we don't employ syn cookies, we don't filter on the
+MAC, watch for smurfing, or anything else that's cool.  Let's go with
+True.
+
+Final Answer: A
+
+
+
+6. Which of the following statement is correct?
+
+A - Authentication policy is used in this experiment.
+B - Intrusion Detection System policy is used in this experiment.
+C - Both A and B
+
+Using the same definition for "this experiment" from question 5, B.
+Using the definition of "this experiemnt" as being the assignment as a
+whole, C.  For the sake of consistency, let's go with B.
+
+Final Answer: B
