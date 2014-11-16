@@ -101,9 +101,10 @@ whole, C.  Per conversation with instructor, the definition of "this
 experiement" is to include the entire assignment.  Per instructions,
 step 3, authentication is employed making A correct.  Interestingly
 enough, because step 3 also involves sending what are classified as
-IDS (Intrusion Detection System) events, it is technically capable of
-satisfying the burden of proof necessary to consider of B correct, as
-well (even though DoS detection is perhaps more in keeping with the
-spirit of a real-world IDS).
+IDS (Intrusion Detection System) events
+(https://github.com/Resonance-SDN/pyresonance/wiki/Running-PyResonance),
+it is technically capable of satisfying the burden of proof necessary
+to consider of B correct, as well (even though DoS detection is
+perhaps more in keeping with the spirit of a real-world IDS).
 
 Final Answer: C
