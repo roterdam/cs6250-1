@@ -1,9 +1,9 @@
 1. C
 2. A
 3. D
-4. A
+4. D
 5. A
-6. B
+6. C
 
 1. Which of the following best describes DoS attack?
 A - DoS attacks are an attempt to make a machine or network resource
@@ -63,11 +63,12 @@ C - With PyResonance, multiple states can be built into each network
     policy.
 D - All of the above
 
-From the Resonance-SDN github wiki:
-"PyResonance is a Resonance platform implemented in Pyretic."
-A it is.
+From the Resonance-SDN github wiki: "PyResonance is a Resonance
+platform implemented in Pyretic."  Per conversation with instructor, D
+has been selected encompass not just the direct answer to the
+question, but the more thorough description.
 
-Final Answer: A
+Final Answer: D
 
 
 
@@ -96,6 +97,13 @@ C - Both A and B
 
 Using the same definition for "this experiment" from question 5, B.
 Using the definition of "this experiemnt" as being the assignment as a
-whole, C.  For the sake of consistency, let's go with B.
+whole, C.  Per conversation with instructor, the definition of "this
+experiement" is to include the entire assignment.  Per instructions,
+step 3, authentication is employed making A correct.  Interestingly
+enough, because step 3 also involves sending what are classified as
+IDS (Intrusion Detection System) events, it is technically capable of
+satisfying the burden of proof necessary to consider of B correct, as
+well (even though DoS detection is perhaps more in keeping with the
+spirit of a real-world IDS).
 
-Final Answer: B
+Final Answer: C
